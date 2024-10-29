@@ -1,0 +1,9 @@
+streamlit
+requests
+pandas
+plotly
+python-dotenv
+Pillow
+google-generativeai
+groq
+python-dateutil
