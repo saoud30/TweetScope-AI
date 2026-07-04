@@ -45,7 +45,7 @@ TweetScope AI is your advanced social media observatory, providing deep insights
 1. Clone the repository:
 ```bash
 git clone https://github.com/Saoud30/TweetScope-AI
-cd TweetScope-AI 
+cd TweetScope-AI
 ```
 
 2. Create and activate a virtual environment:
@@ -59,7 +59,7 @@ source venv/bin/activate  # On Windows, use: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. Create a `.env` file jsut like the `.env.example` file in the project root and add your API keys:
+4. Create a `.env` file just like the `.env.example` file in the project root and add your API keys:
 ```env
 HUGGINGFACE_TOKEN=your_token_here
 GEMINI_API_KEY=your_key_here
@@ -77,6 +77,18 @@ streamlit run app.py
 ```
 
 Navigate to `http://localhost:8501` in your web browser to use the application.
+
+### Xquik exports
+
+Use **Upload Xquik export** to prefill the tweet text area from a CSV, JSON, or
+JSONL export. The parser accepts common tweet fields such as `text`,
+`full_text`, `tweet_text`, `content`, `body`, and `message`.
+
+Run the import tests with:
+
+```bash
+python3 -m unittest test_xquik_import.py
+```
 
 ## 📊 Features in Detail
 
