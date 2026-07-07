@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 from pathlib import Path
 import google.generativeai as genai
 from groq import Groq
+from xquik_import import XquikImportError, load_xquik_texts
 
 # Load environment variables
 env_path = Path('.') / '.env'
@@ -311,10 +312,21 @@ def main():
         use_prompt_guard = st.toggle("Enable Content Safety Check", value=False)
         st.info("Content Safety Check uses an additional model to analyze potential risks in the text.")
 
+    imported_tweet = ""
+    uploaded_export = st.file_uploader("Upload Xquik export", type=["csv", "json", "jsonl"])
+    if uploaded_export is not None:
+        try:
+            imported_tweets = load_xquik_texts(uploaded_export)
+        except XquikImportError as error:
+            st.error(f"Could not read the export: {error}")
+        else:
+            imported_tweet = st.selectbox("Choose a tweet from the export", imported_tweets)
+            st.success(f"Loaded {len(imported_tweets)} tweets from the export.")
+
     # Input section
     col1, col2 = st.columns([3, 1])
     with col1:
-        text_input = st.text_area("Enter your tweet:", height=100)
+        text_input = st.text_area("Enter your tweet:", value=imported_tweet, height=100)
     with col2:
         st.write("")  # Spacing
         st.write("")  # Spacing
@@ -326,7 +338,7 @@ def main():
         st.session_state.analysis_history = []
         st.rerun()
 
-    if analyze_button and text_input:
+    if analyze_button and text_input.strip():
         with st.spinner("Analyzing..."):
             results = analyze_text(text_input, use_prompt_guard=use_prompt_guard)
 
@@ -420,6 +432,8 @@ def main():
                         data=history_json,
                         use_container_width=True
                     )
+    elif analyze_button:
+        st.warning("Enter a tweet or upload an export first.")
 
     # Footer
     st.markdown("---")
