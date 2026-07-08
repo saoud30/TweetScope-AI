@@ -144,13 +144,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ---
 
-## 📧 Contact
-
-Project Link: [https://github.com/Saoud30/TweetScope-AI](https://github.com/Saoud30/TweetScope-AI)
-- Email: mohdsarimansari30.com
-- Twitter: [@Shazyansar](https://twitter.com/Shazyansar)
-
-
 <div align="center">
   Made with ❤️ by the Shazy
 </div>
